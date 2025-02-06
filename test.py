@@ -4,7 +4,7 @@ import numpy as np
 
 st.title('Agile Assessment Data Preprocessor')
 
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader('Select your "Agile Assessment" csv file.')
 if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
     data = pd.read_csv(uploaded_file, encoding='windows-1252')
