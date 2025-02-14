@@ -26,7 +26,7 @@ def replacer(item):
 applied_func = applied.map(replacer)
 
 dct = dict()
-col_names = ["Feel Role", "Team Perform Role", "Team Composition", "Team Set Goals", "Team Backlog", "Team Ceremonies", "Team Performance", "Customer Feedback", "Team Deployment", "Team Retrospectives", "Team Experience", "Job Satisfaction"]
+col_names = ["Role Sentiment", "Team Perform Role", "Team Composition", "Team Set Goals", "Team Backlog", "Team Ceremonies", "Team Performance", "Customer Feedback", "Team Deployment", "Team Retrospectives", "Team Experience", "Work Life Balance"]
 for i in range(len(applied_func.columns)):
     dct[applied_func.columns[i]] = col_names[i]
 
