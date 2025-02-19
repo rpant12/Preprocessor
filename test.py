@@ -20,6 +20,10 @@ def replacer(item):
     else:
         return item
 
+def convert_df(df):
+    return df.to_csv(index=False).encode('utf-8')
+
+
 uploaded_file = st.file_uploader('Select your "Agile Assessment" csv file.')
 if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
@@ -38,10 +42,6 @@ if uploaded_file is not None:
 
     data_trunc_t = applied_func.transpose().reset_index(names = "Trait")
     data_trunc_t["Average"] = data_trunc_t.drop("Trait", axis = 1).mean(axis = 1)
-
-    def convert_df(df):
-    return df.to_csv(index=False).encode('utf-8')
-
 
     csv = convert_df(data_trunc_t)
 
