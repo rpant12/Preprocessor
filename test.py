@@ -7,7 +7,10 @@ st.title('Agile Assessment Data Preprocessor')
 uploaded_file = st.file_uploader('Select your "Agile Assessment" csv file.')
 if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
+    st.success('File successfully uploaded and processed.')
     data = pd.read_csv(uploaded_file, encoding='windows-1252')
+else:
+    st.warning("Please upload a file!")
 
 applied = data.astype(str).apply(lambda x: x.str[0:20]).drop(["Id", "Start time", "Completion time", "Email", "Name", 'Which best describes the function of your team?\xa0\xa0', 'What is your role level at Pacific Life?\xa0\xa0', 'How long have you been a member of your current team?\xa0\xa0', 'Have you completed formal agile training?', 'If yes, describe the type of training.\xa0', 'How long has your team been operating using agile practices?\xa0'], axis = 1)
 
