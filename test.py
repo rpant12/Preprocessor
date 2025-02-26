@@ -102,7 +102,11 @@ if uploaded_file is not None:
 
     fig.update_traces(marker=dict(line=dict(width=5, color='DarkSlateGrey')))
    
-    st.plotly_chart(fig)
+    col1, col2 = st.columns([3, 1])
+
+    col1.plotly_chart(fig, use_container_width = False)
+
+    col2.write("hi!")
 
 
 else:
