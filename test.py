@@ -99,6 +99,14 @@ if uploaded_file is not None:
                 opacity=1,
                 layer="below")
     )
+    fig.update_layout(
+       title={
+           'text': "Team Metrics",
+           'font': dict(size = 30),
+           'y':0.93,
+           'x':0.5,
+           'xanchor': 'center',
+           'yanchor': 'top'})
 
     fig.update_traces(marker=dict(line=dict(width=5, color='DarkSlateGrey')))
    
