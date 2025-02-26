@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from PIL import Image
 
+st.set_page_config(layout="wide")
 
 st.title('Agile Assessment Data Preprocessor')
 
