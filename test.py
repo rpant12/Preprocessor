@@ -99,6 +99,9 @@ if uploaded_file is not None:
                 layer="below")
     )
 
+   fig.update_traces(marker=dict(line=dict(width=5,
+                                        color='DarkSlateGrey')))
+
     st.plotly_chart(fig)
 
 
