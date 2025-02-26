@@ -71,6 +71,7 @@ if uploaded_file is not None:
         go.Bar(x = proc["Trait"], 
             y = proc["Average"],
             text = proc["Average"],
+            textfont=dict(weight="bold", style="italic", size = 18),
             marker_color = "white")
     ])
     fig.update_layout(
