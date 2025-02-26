@@ -98,7 +98,7 @@ if uploaded_file is not None:
                 layer="below")
     )
 
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width = False)
 
 
 else:
