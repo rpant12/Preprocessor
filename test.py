@@ -1,7 +1,8 @@
-import streamlit as st # type: ignore
-import pandas as pd # type: ignore
-import numpy as np #type: ignore
-import plotly.graph_objects as go #type: ignore
+import streamlit as st
+import pandas as pd 
+import numpy as np
+import plotly.graph_objects as go
+from PIL import Image
 
 
 st.title('Agile Assessment Data Preprocessor')
@@ -57,24 +58,44 @@ if uploaded_file is not None:
 
     st.download_button("Download the pre-processed file", csv,  "processed.csv", "text/csv", key='download-csv')
 
-    data_trunc_t["Color"] = data_trunc_t.apply(color, axis = 1)
+    # data_trunc_t["Color"] = data_trunc_t.apply(color, axis = 1)
+
+    proc = data_trunc_t.copy()
+
+    import plotly.graph_objects as go
+
+    image = Image.open("background.png")
 
     fig = go.Figure(data = [
-        go.Bar(x = data_trunc_t["Trait"], 
-            y = data_trunc_t["Average"],
-            marker_color=data_trunc_t["Color"])
+        go.Bar(x = proc["Trait"], 
+            y = proc["Average"],
+            text = proc["Average"],
+            marker_color = "white")
     ])
     fig.update_layout(
+        yaxis_range=[0,3],
         autosize=False,
         width=1028,
-        height=720,
+        height=800,
         margin=dict(
             l=50,
             r=50,
             b=100,
             t=100,
-            pad=4
         )
+    )
+    fig.add_layout_image(
+            dict(
+                source=image,
+                xref="x",
+                yref="y",
+                x=-0.5,
+                y=3,
+                sizex=12,
+                sizey=3,
+                sizing="stretch",
+                opacity=1,
+                layer="below")
     )
 
     st.plotly_chart(fig)
