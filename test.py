@@ -114,7 +114,7 @@ if uploaded_file is not None:
 
     col1.plotly_chart(fig, use_container_width = False)
 
-    col2.write("hi!")
+   col2.image("sideimage.png")
 
 
 else:
