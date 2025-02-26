@@ -1,6 +1,8 @@
 import streamlit as st # type: ignore
 import pandas as pd # type: ignore
 import numpy as np #type: ignore
+import plotly.graph_objects as go #type: ignore
+
 
 st.title('Agile Assessment Data Preprocessor')
 
@@ -43,9 +45,40 @@ if uploaded_file is not None:
     data_trunc_t = applied_func.transpose().reset_index(names = "Trait")
     data_trunc_t["Average"] = data_trunc_t.drop("Trait", axis = 1).mean(axis = 1)
 
+    def color(row):
+        if row["Average"] >= 2:
+            return "#343091"
+        elif row["Average"] >= 1:
+            return "#7577b8"
+        else:
+            return "#babad4"
+
     csv = convert_df(data_trunc_t)
 
-
     st.download_button("Download the pre-processed file", csv,  "processed.csv", "text/csv", key='download-csv')
+
+    data_trunc_t["Color"] = data_trunc_t.apply(color, axis = 1)
+
+    fig = go.Figure(data = [
+        go.Bar(x = data_trunc_t["Trait"], 
+            y = data_trunc_t["Average"],
+            marker_color=data_trunc_t["Color"])
+    ])
+    fig.update_layout(
+        autosize=False,
+        width=1028,
+        height=720,
+        margin=dict(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        )
+    )
+
+    st.plotly_chart(fig)
+
+
 else:
     st.warning("Please upload a file!")
