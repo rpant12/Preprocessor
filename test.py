@@ -45,7 +45,7 @@ if uploaded_file is not None:
     applied_func = applied_func.rename(dct, axis = 1)
 
     data_trunc_t = applied_func.transpose().reset_index(names = "Trait")
-    data_trunc_t["Average"] = data_trunc_t.drop("Trait", axis = 1).mean(axis = 1)
+    data_trunc_t["Average"] = data_trunc_t.drop("Trait", axis = 1).mean(axis = 1).round(2)
 
     def color(row):
         if row["Average"] >= 2:
