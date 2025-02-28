@@ -4,7 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from PIL import Image
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title = "Agile Assessment", layout="wide")
 
 st.title('Agile Assessment Data Preprocessor')
 
@@ -67,6 +67,8 @@ if uploaded_file is not None:
 
     image = Image.open("background.png")
 
+    overall_average = proc["Average"].mean().round(2)
+
     fig = go.Figure(data = [
         go.Bar(x = proc["Trait"], 
             y = proc["Average"],
@@ -109,12 +111,26 @@ if uploaded_file is not None:
            'yanchor': 'top'})
 
     fig.update_traces(marker=dict(line=dict(width=5, color='DarkSlateGrey')))
-   
-    col1, col2 = st.columns([3, 1])
+
+    col1, col2 = st.columns([4, 1])
 
     col1.plotly_chart(fig, use_container_width = False)
 
-    col2.image("sideimage.png")
+    col2.subheader("Legend:")
+
+    col2.html(
+    '<h3><span style="display: inline-block; width: 20px; height: 20px; background-color: #b5b3da;"></span> &nbsp; SHU - BEGINNER </br> \
+    <span style="display: inline-block; width: 20px; height: 20px; background-color: #8587be;"></span> &nbsp; HA - PRACTICING </br> \
+    <span style="display: inline-block; width: 20px; height: 20px; background-color: #241e5f;"></span> &nbsp; RI - MASTER </h3> \
+    <h3> This chart visualizes employee experience across 11 dimensions of Health & Engagement. </h3> \
+    <h3> The SHU Level indicates the beginning of agility and a product mindset, but not enough to create a tangible impact. </h3> \
+    <h3> The HA Level is the "practicing" level indicating a functioning state for that dimension. This is the goal we are trying to achieve. </h3> \
+    <h3> The RI Level suggests mastery of that dimension, it is the future vision we should strive for. </h3>'
+)
+
+    col2.html(
+        "<h1> <center> Score Average: </center> </h1> <h2> <center>" + str(overall_average) + "<center> </h2>"
+    )
 
 
 else:
